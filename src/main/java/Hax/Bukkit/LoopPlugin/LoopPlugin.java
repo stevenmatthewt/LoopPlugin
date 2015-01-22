@@ -10,12 +10,12 @@ import org.bukkit.util.ChatPaginator;
 public final class LoopPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
-        getLogger().info("onEnable has been invoked!");
+        getLogger().info("LoopPlugin has been enabled!");
     }
  
     @Override
     public void onDisable() {
-        getLogger().info("onDisable has been invoked!");
+        getLogger().info("LoopPlugin has been disabled!");
     }
     
     @Override
@@ -36,7 +36,12 @@ public final class LoopPlugin extends JavaPlugin {
     }
     
     private boolean executeCommand(final CommandSender sender, final String cmd, final int repeat, int delay) {
-    	for (int i = 0; i < repeat; i++) {
+    	sender.sendMessage(ChatColor.RED + "Loop Progress: 1/" + repeat);
+		if (!Bukkit.dispatchCommand(sender, cmd)) {
+			return false;
+		}
+		
+    	for (int i = 1; i < repeat; i++) {
     		final int j = i + 1;
 			getServer().getScheduler().scheduleSyncDelayedTask(this,
 					new Runnable() {

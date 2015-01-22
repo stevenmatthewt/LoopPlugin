@@ -4,6 +4,6 @@ version: 1.0
 commands:
   loop:
     description: Execute other commands in a loop!
-    usage: /loop "<command>" repeatTimes delay
+    usage: /loop command repeatTimes delay
     permission: LoopPlugin.loop
     permission-message: You don't have permission. Try sudo :)
