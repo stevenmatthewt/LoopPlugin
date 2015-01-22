@@ -1,9 +1,11 @@
 package Hax.Bukkit.LoopPlugin;
  
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.ChatPaginator;
  
 public final class LoopPlugin extends JavaPlugin {
     @Override
@@ -33,12 +35,14 @@ public final class LoopPlugin extends JavaPlugin {
     	return false; 
     }
     
-    private boolean executeCommand(final CommandSender sender, final String cmd, int repeat, int delay) {
+    private boolean executeCommand(final CommandSender sender, final String cmd, final int repeat, int delay) {
     	for (int i = 0; i < repeat; i++) {
+    		final int j = i + 1;
 			getServer().getScheduler().scheduleSyncDelayedTask(this,
 					new Runnable() {
 						@Override
 						public void run() {
+							sender.sendMessage(ChatColor.RED + "Loop Progress: " + j + "/" + repeat);
 							Bukkit.dispatchCommand(sender, cmd);
 						}
 					}, delay*i);
