@@ -7,11 +7,21 @@
       <plugins>
           <plugin>
               <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-compiler-plugin</artifactId>
+              <artifactId>maven-shade-plugin</artifactId>
               <configuration>
-                  <source>1.6</source>
-                  <target>1.6</target>
+                  <instructions>
+              		<Embed-Dependency>exp4j</Embed-Dependency>
+ 					<Embed-Transitive>true</Embed-Transitive>
+ 			      </instructions>
               </configuration>
+              <executions>
+	          <execution>
+	            <phase>package</phase>
+	            <goals>
+	              <goal>shade</goal>
+	            </goals>
+	          </execution>
+        	</executions>
           </plugin>
       </plugins>
    </build>
@@ -29,5 +39,11 @@
            <type>jar</type>
            <scope>provided</scope>
        </dependency>
-   </dependencies>
+       <dependency>
+		    <groupId>net.objecthunter</groupId>
+		    <artifactId>exp4j</artifactId>
+		    <version>0.4.4</version>
+		    <type>jar</type>
+		</dependency> 
+   		</dependencies>
 </project>
